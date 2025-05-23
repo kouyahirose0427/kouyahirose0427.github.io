@@ -1,0 +1,353 @@
+//パーシャルファイルを呼び出します
+@use "reset";
+@use "color";
+
+//余白は8pxの倍数で指定する
+$unit:8px;
+
+//ブレイクポイントを登録
+$tablet_point:640px;
+$pc_point:900px;
+
+//メディアクエリ
+@mixin tablet{
+  @media (width >= $tablet_point){
+    @content;
+}
+}
+@mixin pc{
+  @media (width >= $pc_point){
+@content;
+  }
+}
+
+html{
+  font-size: 62.5%;/* 100%=16pxで62.5%=10px */
+}
+
+body{
+  font-size: 1.6rem;/* これで文字のサイズが16px相当になる */
+}
+
+h1,h2,.nav-title{
+  font-family: "Oswald", sans-serif;
+}
+
+//header部分
+header{
+  background-color: color.$header;
+  padding: 0 $unit*2;
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  >h1{
+    font-size: 2.8rem;
+  }
+//900px以上の時
+@include pc(){
+height: 100px;
+justify-content: center;
+position: static;
+>h1{
+font-size: 3.8rem;
+}
+}
+}
+
+//nav部分
+#g-nav{
+  width: 100%;
+  height: calc(100vh - 70px);
+  background-color: color.$nav;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  z-index: 10;
+  padding: $unit*4;
+  li{
+  margin-bottom: $unit*3;
+  >a{
+ display: block;
+  padding: $unit;
+  font-size: 1.8rem;
+  color: #000;
+  border-bottom: solid 2px #000;
+}
+}
+//900以上
+@include pc (){
+height: 50px;
+padding: 0;
+position: sticky;
+top: 0;
+>ul{
+display: flex;
+height: 50px;
+justify-content: center;
+align-items: center;
+gap: 0 30px;
+>li{
+margin-bottom: 0;
+>a{
+padding: $unit $unit*2;
+border-bottom: 0;
+}
+}
+}
+}
+}
+
+@include pc (){
+
+//navタイトル
+.nav-title{
+position: fixed;
+top: 0;
+left: 50px;
+height: 50px;
+z-index: 10;
+line-height: 50px;
+font-size: 2.4rem;
+display: none;
+}
+#g-nav.scroll{
+/* box-shadow: 0 6px 6px #AAA; */
+background-color: color.$nav;
+backdrop-filter: blur(8px);
+}
+.scroll + .nav-title{
+display: block;
+}
+}
+//ハンバーガーボタン
+#ham-btn{
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  position: relative;
+  >span{
+    display: block;
+    width: 60%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    &::before{
+      display: block;
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: rgb(0, 0, 0);
+      translate: 0 -10px;
+      transition: 0.2s;
+    }
+    &::after{
+      display: block;
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: #000000;
+      translate: 0 10px;
+      transition: 0.2s;
+    }
+  }
+  //900px以上の時
+@include pc (){
+display: none;
+}
+}
+
+#ham-btn.is-active>span{
+background-color: transparent;
+&::before{
+  translate: 0;
+  rotate: 45deg;
+}
+&::after{
+  translate: 0 -1px;
+  rotate: -45deg;
+}
+}
+
+main{
+  padding: 80px 10px 10px;
+  @include pc(){
+    padding: 10px;
+    }
+}
+
+//contents部分
+.grid-wrapper{
+display: grid;
+grid-template-columns: 1fr;
+gap: 10px 0;
+}
+.contents{
+  display: flex;
+  flex-direction: column-reverse;
+
+//900以上の時
+@include pc(){
+flex-direction: row-reverse;
+justify-content: space-between;
+>.content-text{
+width: calc((100% - 20px) / 3);
+}
+>.content-img{
+width: calc((100% - 20px) / 3 * 2 + 10px);
+margin-bottom: 0;
+}
+&:nth-of-type(2){
+flex-direction: row;
+}
+}
+}
+
+.content-img{
+  width: 100%;
+  aspect-ratio: 1/0.8;
+  margin-bottom: 10px;
+  >img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+.content-text{
+  width: 100%;
+  aspect-ratio: 1/0.6;
+  background-color: color.$content;
+  padding: $unit*2;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  text-align: center;
+  >h2{
+    margin-bottom: $unit*2;
+    font-size: 2.6rem;
+  }
+  >p{
+    line-height: 1.8;
+  }
+}
+
+//col-1部分
+.col-1{
+  background-color: color.$col-1;
+  margin: 10px 0;
+  padding: $unit*5 $unit*2;
+  >h2{
+    font-size: 2.2rem;
+    margin-bottom: $unit*2;
+    line-height: 1.8;
+  }
+  >p{
+    line-height: 1.8;
+  }
+}
+
+
+
+//col-3部分
+.col-3-wrapper{
+display: grid;
+grid-template-columns:repeat(auto-filt,minmax(293px,1fr));
+gap: 10px 0;
+@include pc(){
+grid-template-columns: repeat(3,calc((100% - 20px) / 3));
+gap: 0 10px;
+
+}
+}
+
+
+.col-3-box{
+  display: flex;
+  flex-direction: column-reverse;
+//640以上の時
+@include tablet(){
+flex-direction: row-reverse;
+>.col-3-text{
+width: 50%;
+}
+>.col-3-img{
+width: 50%;
+}
+}
+//900px以上の時
+@include pc(){
+flex-direction: column-reverse;
+>.col-3-img{
+width: 100%;
+height: 260px;
+}
+>.col-3-text{
+width: 100%;
+}
+}
+
+}
+.col-3-text{
+  background-color: color.$nav;
+  padding: $unit*4 $unit*2;
+  text-align: center;
+  height: auto;
+  >h2{
+    font-size: 2.2rem;
+    margin-bottom: $unit*3;
+  }
+  >.icon{
+    width: $unit*10;
+    aspect-ratio: 1/1;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: $unit*2;
+    margin: 0 auto $unit*2;
+  }
+  >.to-more{
+    color: #333;
+    background-color: #a587f0;
+    padding: $unit $unit*3;
+    &::after{
+      display: inline-block;
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-top: 2px solid #333;
+      border-right: 2px solid #333;
+      rotate: 45deg;
+      margin-left: $unit;
+    }
+  }
+}
+
+.col-3-img{
+  width: 100%;
+  height: 260px;
+  >img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+
+
+
+
+//footer部分
+footer{
+background-color: color.$header;
+padding: $unit*3;
+text-align: center;
+margin: 0 10px 10px;
+}
+

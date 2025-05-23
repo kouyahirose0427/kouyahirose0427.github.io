@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Furniture-store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Furniture-store</h1>
+    <button id="ham-btn" ><span></span></button>
+  </header>
+  <nav id="g-nav">
+  <ul>
+    <li><a href="brands/">Brands</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Stores</a></li>
+    <li><a href="#">Catalogs</a></li>
+    <li><a href="#">Styling tips</a></li>
+    <li><a href="#">Partners & Press</a></li>
+  </ul>
+  </nav>
+<p class="nav-title">Furniture-store</p>
+  
+
+  <main>
+    <div class="grid-wrapper">
+   <section class="contents">
+    <div class="content-text">
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur<br>
+         adipisicing elit. Necessitatibus nesciunt<br>
+          quos porro ex perspiciatis modi.</p>
+    </div>
+    <div class="content-img">
+    <img src="img/main_1.webp" alt="">
+  </div>
+
+  </section>
+   <section class="contents">
+    <div class="content-text">
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur<br>
+         adipisicing elit. Necessitatibus nesciunt<br>
+          quos porro ex perspiciatis modi.</p>
+    </div>
+    <div class="content-img">
+      <img src="img/main_2.webp" alt="">
+  </div>
+   </section>
+   <section class="contents">
+    <div class="content-text">
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur<br>
+         adipisicing elit. Necessitatibus nesciunt<br>
+          quos porro ex perspiciatis modi.</p>
+    </div>
+    <div class="content-img">
+      <img src="img/main_3.webp" alt="">
+  </div>
+   </section>
+  </div><!-- /.gird -->
+
+  <section class="col-1">
+    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, reiciendis?</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet similique impedit, culpa vitae omnis nihil quo explicabo<br>
+       pariatur repudiandae. Similique itaque placeat nulla neque voluptatibus, adipisci earum sequi in eligendi.</p>
+  </section>
+  
+  <div class="col-3-wrapper">
+    <div class="col-3-box">
+      <div class="col-3-text">
+        <h2>Lorem, ipsum.</h2>
+        <p class="icon"><img src="img/icon-1.svg" alt=""></p>
+        <a href="#" class="to-more">view more</a>
+      </div>
+      <div class="col-3-img">
+        <img src="img/col-3_1.webp" alt="">
+      </div>
+    </div>
+    <div class="col-3-box">
+      <div class="col-3-text">
+        <h2>Lorem, ipsum.</h2>
+        <p class="icon"><img src="img/icon-2.svg" alt=""></p>
+        <a href="#" class="to-more">view more</a>
+      </div>
+      <div class="col-3-img">
+        <img src="img/col-3_2.webp" alt="">
+      </div>
+    </div>
+    <div class="col-3-box">
+      <div class="col-3-text">
+        <h2>Lorem, ipsum.</h2>
+        <p class="icon"><img src="img/icon-3.svg" alt=""></p>
+        <a href="#" class="to-more">view more</a>
+      </div>
+      <div class="col-3-img">
+        <img src="img/col-3_3.webp" alt="">
+      </div>
+    </div>
+  </div><!-- /.col-3-wrapper -->
+  
+  </main>
+  <footer>
+    <p><small>&copy; 2025 Furniture-store</small></p>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(function(){
+    //#ham-btnをクリックしたら
+    $('#ham-btn').on('click',function(){
+    $(this).toggleClass('is-active');
+    $('#g-nav').fadeToggle(200)
+    });
+
+//♯g-navを隠す
+$('#g-nav').hide();
+//resizeかloadした時に画面の幅が900px以上だったら
+$(window).on('resize load',function(){
+if(window.matchMedia('(min-width:900px)').matches){
+//画面の幅が900以上だったら#g-navを表示させる
+$('#g-nav').show();
+}else{
+$('#g-nav').hide();
+$('#ham-btn').removeClass('is-active');
+}
+});
+
+//header要素以上スクロールしたら
+let headerH = $('header').outerHeight();
+$(window).on('scroll',function(){
+//自身のスクロール量を取得
+let w = $(window).scrollTop();
+//header要素以上スクロールしたら
+if( w > headerH){
+//#g-navに「.scroll]をaddする
+$('#g-nav').addClass('scroll');
+}else{
+$('#g-nav').removeClass('scroll');
+}
+});
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>resizeイベントの設定</title>
+    <style>
+    body.resize{
+    background-color: aqua;
+    }
+    </style>
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
+<script>
+$(function(){
+$(window).on('resize',function(){
+//Windowの幅を取得
+let w = $(window).width();
+console.log(w);
+
+//変数ｗ800px以上の時
+if(window.matchMedia('(min-width:800px)').matches){
+$('body').addClass('resize');
+}else{
+$('body').removeClass('resize');
+}
+
+
+});
+});
+</script>
+</body>
+</html>
